@@ -3,10 +3,10 @@
     <color name="colorPrimary">#BEE47070</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#414948</color>
-    <color name="student_background">#BEFAD6D6</color>
-    <color name="student_message_background">#BEFFFFFF</color>
-    <color name="student_message_background_1">#D5F3C0C0</color>
-    <color name="teacher_background">#BEFAD6D6</color>
-    <color name="teacher_message_background">#BEFFFFFF</color>
-    <color name="background">#BEFFFFFF</color>
+    <color name="student_background">#BEFFFFFF</color>
+    <color name="student_message_background">#65B5D5F6</color>
+    <color name="student_message_background_1">#D5FFFFFF</color>
+    <color name="teacher_background">#BEFFFFFF</color>
+    <color name="teacher_message_background">#65B5D5F6</color>
+    <color name="background">#FFFFFF</color>
 </resources>

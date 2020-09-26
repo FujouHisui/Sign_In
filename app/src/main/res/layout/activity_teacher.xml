@@ -10,6 +10,7 @@
     android:background="@color/teacher_background"
     >
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,31 +23,32 @@
         >
 
         <ImageView
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="30dp"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="78dp"
             android:layout_marginBottom="8dp"
+            android:layout_centerHorizontal="true"
             android:src="@mipmap/ic_logo_1" />
 
         <ImageView
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="155dp"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="258dp"
             android:layout_marginBottom="8dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
             android:src="@mipmap/ic_logo_2" />
 
         <ImageView
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="280dp"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="438dp"
             android:layout_marginBottom="8dp"
-            android:src="@mipmap/ic_logo_3" />
+            android:src="@mipmap/ic_logo_3"
+            android:layout_centerHorizontal="true"/>
 
         <TextView
             android:id="@+id/teacher_text"
@@ -57,7 +59,7 @@
             android:layout_weight="1"
             android:text="教师"
             android:textColor="@color/colorAccent"
-            android:textSize="25dp"
+            android:textSize="30dp"
             android:layout_marginStart="35dp"
             android:layout_marginEnd="280dp"
             />
@@ -71,21 +73,21 @@
             android:layout_weight="1"
             android:text="数字签到"
             android:textColor="@color/colorAccent"
-            android:textSize="15dp"
-            android:layout_marginStart="43dp"
+            android:textSize="25dp"
+            android:layout_centerHorizontal="true"
             />
 
         <TextView
-            android:id="@+id/GPS"
+            android:id="@+id/qr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="205dp"
+            android:layout_marginTop="390dp"
             android:layout_weight="1"
             android:text="二维码签到"
             android:textColor="@color/colorAccent"
-            android:textSize="15dp"
-            android:layout_marginStart="165dp"
+            android:textSize="25dp"
+            android:layout_centerHorizontal="true"
             />
 
         <TextView
@@ -93,12 +95,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="205dp"
+            android:layout_marginTop="565dp"
             android:layout_weight="1"
-            android:text="签到记录"
+            android:text="上课记录"
             android:textColor="@color/colorAccent"
-            android:textSize="15dp"
-            android:layout_marginStart="295dp"
+            android:textSize="25dp"
+            android:layout_centerHorizontal="true"
+
             />
     </RelativeLayout>
 

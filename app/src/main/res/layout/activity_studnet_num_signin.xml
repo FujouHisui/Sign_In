@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".LoginActivity"
     android:background="@color/teacher_background"
-    >
+    tools:ignore="MissingDefaultResource">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -23,27 +23,27 @@
 
 
         <TextView
-            android:id="@+id/qiandaolist_text"
+            android:id="@+id/number_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="150dp"
             android:layout_weight="1"
-            android:text="签到记录"
+            android:text="数字签到"
             android:textColor="@color/colorAccent"
-            android:textSize="25dp"
-            android:layout_marginStart="35dp"
-            android:layout_marginEnd="50dp"
+            android:textSize="50dp"
+            android:layout_centerInParent="true"
             />
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="55dp"
+
+        <EditText
+            android:hint="请输入数字"
+            android:layout_width="380dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="280dp"
             android:layout_marginBottom="55dp"
-            android:background="@color/student_message_background_1"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
             android:layout_centerInParent="true"
             />
 
