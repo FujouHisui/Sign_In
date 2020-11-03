@@ -6,50 +6,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity"
+    tools:context=".ClassListActivity"
     android:background="@color/teacher_background"
     >
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="30dp"
         android:layout_weight="1"
         android:background="@color/teacher_message_background"
         >
 
 
+
         <TextView
-            android:id="@+id/qr_text"
+            android:id="@+id/add_class_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="150dp"
             android:layout_weight="1"
-            android:text="二维码签到"
+            android:text="添加课程"
             android:textColor="@color/colorAccent"
             android:textSize="40dp"
-            android:layout_centerInParent="true"
+            android:layout_marginStart="35dp"
+            android:layout_centerHorizontal="true"
             />
 
-        <ImageView
-            android:layout_width="380dp"
-            android:layout_height="380dp"
-            android:layout_marginTop="150dp"
-            android:layout_marginBottom="55dp"
-            android:layout_marginStart="10dp"
+        <EditText
+            android:id="@+id/add_class_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
             android:layout_marginEnd="10dp"
-            android:background="@color/student_message_background_1"
+            android:layout_marginTop="258dp"
+            android:layout_marginBottom="8dp"
+            android:text="请输入课程名字"
             />
 
 
 
 
     </RelativeLayout>
-
 
 
 

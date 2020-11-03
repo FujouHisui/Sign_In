@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity"
+    tools:context=".ClassListActivity"
     android:background="@color/teacher_background"
     >
 
@@ -24,7 +24,7 @@
 
 
         <TextView
-            android:id="@+id/teacher_text"
+            android:id="@+id/class_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -38,6 +38,7 @@
             />
 
         <ListView
+            android:id="@+id/all_class"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"

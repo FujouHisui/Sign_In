@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity"
+    tools:context=".TeacherActivity"
     android:background="@color/teacher_background"
     >
 
@@ -22,33 +22,52 @@
         android:background="@color/teacher_message_background"
         >
 
-        <ImageView
-            android:layout_width="125dp"
-            android:layout_height="125dp"
+        <ImageButton
+            android:id="@+id/num_sign_in"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="78dp"
+            android:layout_marginTop="18dp"
             android:layout_marginBottom="8dp"
             android:layout_centerHorizontal="true"
-            android:src="@mipmap/ic_logo_1" />
+            android:background="@color/background"
+            style="@android:style/Widget.Holo.ImageButton"
+            android:scaleType="centerInside"
+            tools:src="@mipmap/ic_logo_1" />
 
-        <ImageView
-            android:layout_width="125dp"
-            android:layout_height="125dp"
+
+
+        <ImageButton
+            android:id="@+id/add_class"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="258dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="8dp"
+            android:layout_below="@id/num_sign_in"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
+            android:background="@color/background"
+            android:scaleType="centerInside"
+            style="@android:style/Widget.Holo.ImageButton"
             android:src="@mipmap/ic_logo_2" />
 
-        <ImageView
-            android:layout_width="125dp"
-            android:layout_height="125dp"
+
+        <ImageButton
+            android:id="@+id/list_sign_in"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="438dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="8dp"
             android:src="@mipmap/ic_logo_3"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/add_class"
+            android:background="@color/background"
+            android:scaleType="centerInside"
+            style="@android:style/Widget.Holo.ImageButton"
+            />
+
 
         <TextView
             android:id="@+id/teacher_text"
@@ -68,23 +87,23 @@
             android:id="@+id/number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="205dp"
+            android:layout_below="@id/num_sign_in"
+            android:layout_marginTop="0dp"
             android:layout_weight="1"
-            android:text="数字签到"
+            android:text="发起签到"
             android:textColor="@color/colorAccent"
             android:textSize="25dp"
             android:layout_centerHorizontal="true"
             />
 
         <TextView
-            android:id="@+id/qr"
+            android:id="@+id/add_class_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="390dp"
+            android:layout_marginTop="0dp"
+            android:layout_below="@id/add_class"
             android:layout_weight="1"
-            android:text="二维码签到"
+            android:text="增加课程"
             android:textColor="@color/colorAccent"
             android:textSize="25dp"
             android:layout_centerHorizontal="true"
@@ -95,7 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="565dp"
+            android:layout_marginTop="480dp"
             android:layout_weight="1"
             android:text="上课记录"
             android:textColor="@color/colorAccent"
