@@ -6,17 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ClassListActivity"
+    tools:context=".AddClassActivity"
     android:background="@color/teacher_background"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="18dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="18dp"
         android:layout_weight="1"
         android:background="@color/teacher_message_background"
         >
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="108dp"
             android:layout_weight="1"
             android:text="添加课程"
             android:textColor="@color/colorAccent"
@@ -39,18 +39,67 @@
 
         <EditText
             android:id="@+id/add_class_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:scaleType="centerInside"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="258dp"
+            android:layout_marginStart="108dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginTop="268dp"
             android:layout_marginBottom="8dp"
-            android:text="请输入课程名字"
+            android:hint="请输入课程名字"
             />
 
+        <EditText
+            android:id="@+id/add_teacher_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:layout_marginStart="108dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginTop="328dp"
+            android:layout_marginBottom="8dp"
+            android:hint="请输入教师名字"
+            />
+
+        <EditText
+            android:id="@+id/add_class_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:layout_marginStart="108dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginTop="208dp"
+            android:layout_marginBottom="8dp"
+            android:hint="请输课程序号"
+            />
+
+
+        <Button
+            android:id="@+id/add_class_true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:layout_marginEnd="48dp"
+            android:layout_marginStart="108dp"
+            android:layout_marginTop="408dp"
+            android:layout_marginBottom="8dp"
+            android:text="确定"
+            android:textSize="28dp"
+            android:textColor="@color/student_message_background_1"
+            android:background="@color/colorPrimary"
+            />
 
 
 

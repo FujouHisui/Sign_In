@@ -1,19 +1,17 @@
 package tech.hisui.sign_in;
 
+import android.app.AppComponentFactory;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.EditText;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AddClassActivity extends AppCompatActivity {
-
-
+public class AttendanceListActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addclass);
+        setContentView(R.layout.attendance_list);
 
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){
@@ -33,3 +31,4 @@ public class AddClassActivity extends AppCompatActivity {
     }
 
 }
+
