@@ -6,47 +6,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity"
+    tools:context=".TeacherActivity"
     android:background="@color/teacher_background"
     >
 
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="18dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="18dp"
         android:layout_weight="1"
         android:background="@color/teacher_message_background"
         >
 
-        <ImageView
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="30dp"
+        <ImageButton
+            android:id="@+id/teacher_class_list"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="18dp"
             android:layout_marginBottom="8dp"
-            android:src="@mipmap/ic_logo_1" />
+            android:layout_centerHorizontal="true"
+            android:background="@color/background"
+            style="@android:style/Widget.Holo.ImageButton"
+            android:scaleType="centerInside"
+            tools:src="@mipmap/ic_logo_1" />
 
-        <ImageView
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="155dp"
+
+        <ImageButton
+            android:id="@+id/add_class"
+            style="@android:style/Widget.Holo.ImageButton"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_below="@id/teacher_class_list"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="48dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="108dp"
-            android:layout_marginBottom="8dp"
+            android:background="@color/background"
+            android:scaleType="centerInside"
             android:src="@mipmap/ic_logo_2" />
 
-        <ImageView
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="280dp"
+
+        <ImageButton
+            android:id="@+id/list_sign_in"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="48dp"
             android:layout_marginBottom="8dp"
-            android:src="@mipmap/ic_logo_3" />
+            android:src="@mipmap/ic_logo_3"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/add_class"
+            android:background="@color/background"
+            android:scaleType="centerInside"
+            style="@android:style/Widget.Holo.ImageButton"
+            />
+
 
         <TextView
             android:id="@+id/teacher_text"
@@ -54,51 +72,48 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="15dp"
-            android:layout_weight="1"
             android:text="教师"
             android:textColor="@color/colorAccent"
-            android:textSize="25dp"
+            android:textSize="30dp"
             android:layout_marginStart="35dp"
             android:layout_marginEnd="280dp"
             />
 
         <TextView
-            android:id="@+id/number"
+            android:id="@+id/teacher_class_list_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="205dp"
-            android:layout_weight="1"
-            android:text="数字签到"
+            android:layout_marginTop="1dp"
+            android:layout_below="@id/teacher_class_list"
+            android:text="课程列表"
             android:textColor="@color/colorAccent"
-            android:textSize="15dp"
-            android:layout_marginStart="43dp"
+            android:textSize="25dp"
+            android:layout_centerHorizontal="true"
             />
 
         <TextView
-            android:id="@+id/GPS"
+            android:id="@+id/add_class_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="205dp"
-            android:layout_weight="1"
-            android:text="二维码签到"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/add_class"
+            android:text="增加课程"
             android:textColor="@color/colorAccent"
-            android:textSize="15dp"
-            android:layout_marginStart="165dp"
+            android:textSize="25dp"
+            android:layout_centerHorizontal="true"
             />
 
         <TextView
             android:id="@+id/teacher_qiandao_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="205dp"
-            android:layout_weight="1"
-            android:text="签到记录"
+            android:layout_marginTop="1dp"
+            android:layout_below="@id/list_sign_in"
+            android:text="上课记录"
             android:textColor="@color/colorAccent"
-            android:textSize="15dp"
-            android:layout_marginStart="295dp"
+            android:textSize="25dp"
+            android:layout_centerHorizontal="true"
+
             />
     </RelativeLayout>
 

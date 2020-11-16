@@ -131,6 +131,7 @@
             android:background="#E35656"
             android:text="注册"
             android:textSize="23dp"
+            android:layout_centerHorizontal="true"
             android:textColor="@android:color/white" />
     </RelativeLayout>
 

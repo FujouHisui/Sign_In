@@ -2,4 +2,8 @@
     <string name="app_name">Sign_In</string>
     <string name="job_label">选择身份</string>
     <string name="jobs_label">选择身份</string>
+    <string name="shared_preference_file_name">sp_login</string>
+    <string name="login_account_name">login_account_name</string>
+    <string name="login_password">login_password</string>
+    <string name="login_remember_password">login_remember_password</string>
 </resources>
