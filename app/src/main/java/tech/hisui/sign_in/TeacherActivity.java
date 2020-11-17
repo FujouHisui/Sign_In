@@ -2,9 +2,11 @@ package tech.hisui.sign_in;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class TeacherActivity extends AppCompatActivity {
@@ -17,6 +19,14 @@ public class TeacherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //绑定布局文件activity_main.xml文件
         setContentView(R.layout.activity_teacher);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);//返回
+        }
+
+
+
         ib_class_list=(ImageButton) findViewById(R.id.teacher_class_list);
         ib_add_class=(ImageButton) findViewById( R.id.add_class);
         ib_list=(ImageButton)findViewById(R.id.list_sign_in);
@@ -55,6 +65,16 @@ public class TeacherActivity extends AppCompatActivity {
         });
 
 
+
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish(); // back button
+                return true;
+        }
+        return super.onOptionsItemSelected(item);//return
 
     }
 

@@ -22,18 +22,18 @@
         android:background="@color/teacher_message_background"
         >
 
+
         <ImageButton
             android:id="@+id/teacher_class_list"
+            style="@android:style/Widget.Holo.ImageButton"
             android:layout_width="128dp"
             android:layout_height="128dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginBottom="8dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="10dp"
             android:background="@color/background"
-            style="@android:style/Widget.Holo.ImageButton"
             android:scaleType="centerInside"
-            tools:src="@mipmap/ic_logo_1" />
+            android:src="@mipmap/ic_logo_1" />
 
 
         <ImageButton
@@ -48,6 +48,8 @@
             android:background="@color/background"
             android:scaleType="centerInside"
             android:src="@mipmap/ic_logo_2" />
+
+
 
 
         <ImageButton
@@ -83,7 +85,7 @@
             android:id="@+id/teacher_class_list_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@id/teacher_class_list"
             android:text="课程列表"
             android:textColor="@color/colorAccent"
