@@ -18,6 +18,7 @@
             />
         <TextView
             android:id="@+id/class_title"
+            android:text="教师名称："
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_subtitle"
