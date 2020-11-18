@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoginActivity"
+    android:background="@color/teacher_background"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="18dp"
+        android:layout_weight="1"
+        android:background="@color/teacher_message_background"
+        >
+        <TextView
+            android:id="@+id/select_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="25dp"
+            android:text="学生序号"
+            android:textColor="@color/colorAccent"
+            android:textSize="30dp"
+            android:layout_marginStart="35dp"
+
+            />
+
+
+        <EditText
+            android:id="@+id/student_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:layout_marginStart="108dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginTop="208dp"
+            android:layout_marginBottom="8dp"
+            android:hint="请输入学生学号"
+            />
+
+        <Button
+            android:id="@+id/sduent_num_true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:layout_marginEnd="48dp"
+            android:layout_marginStart="108dp"
+            android:layout_marginTop="308dp"
+            android:layout_marginBottom="8dp"
+            android:text="确定"
+            android:textSize="28dp"
+            android:textColor="@color/student_message_background_1"
+            android:background="@color/colorPrimary"
+            />
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
