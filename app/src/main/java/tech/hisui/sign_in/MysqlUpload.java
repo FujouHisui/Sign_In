@@ -21,13 +21,14 @@ public class MysqlUpload extends AsyncTask<String, Void, Boolean> {
         uname = strings[0];
         upwd = strings[1];
         boolean aBoolean = false;
-        if (uname.equals("")){
-            return aBoolean;
-        }
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(db_url, db_username,db_password);
             Statement st = con.createStatement();
+            if (uname.equals("") || st.executeQuery("SELECT `user`.username, `user`.`password` FROM `user` WHERE user.username='" + uname + "';").next()){
+                return aBoolean;
+            }
             String sql = "INSERT INTO user(username, `password`) VALUES ('"
                     + uname + "' , '" + upwd + "');";
             st.execute(sql);
