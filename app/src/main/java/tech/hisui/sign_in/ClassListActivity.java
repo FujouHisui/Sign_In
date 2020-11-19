@@ -1,6 +1,7 @@
 package tech.hisui.sign_in;
 
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -62,7 +63,13 @@ public class ClassListActivity extends AppCompatActivity {
                 }
         );
 
+}
+
+    public void clickAlert(View view){
+        Intent intent=new Intent(   ClassListActivity.this,SigninActivity.class);
+        startActivity(intent);  
     }
+
 
     private void initDate() {
         int length;

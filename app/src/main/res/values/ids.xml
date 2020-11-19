@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="requet" type="id" />
+    <item name="map_view" type="id" />
+    <item name="id_gaode_location_map" type="id" />
+</resources>
