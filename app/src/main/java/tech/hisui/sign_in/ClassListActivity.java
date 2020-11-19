@@ -67,7 +67,8 @@ public class ClassListActivity extends AppCompatActivity {
 
     public void clickAlert(View view){
         Intent intent=new Intent(   ClassListActivity.this,SigninActivity.class);
-        startActivity(intent);  
+        startActivity(intent);
+
     }
 
 

@@ -1,6 +1,8 @@
 package tech.hisui.sign_in;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import com.amap.api.maps2d.UiSettings;
 import com.amap.api.maps2d.model.LatLng;
 //import com.cqvie.options.HttpUtilsHttpURLConnection;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 public class SigninActivity extends AppCompatActivity implements LocationSource,AMapLocationListener {
 
@@ -38,6 +41,7 @@ public class SigninActivity extends AppCompatActivity implements LocationSource,
     private boolean isFirstLoc = true;
     String date = null;
 
+    private String[] account = new String[2];
 
     //激活定位
     @Override
@@ -50,6 +54,7 @@ public class SigninActivity extends AppCompatActivity implements LocationSource,
         mListener = null;
 
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +98,7 @@ public class SigninActivity extends AppCompatActivity implements LocationSource,
 
     }
 
-    Intent i = getIntent();
-    String account = i.getStringExtra("Account");
+
 
     private void init() {
         if (aMap == null) {
@@ -150,10 +154,35 @@ public class SigninActivity extends AppCompatActivity implements LocationSource,
             request.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    new AlertDialog.Builder(SigninActivity.this).setTitle("签到位置确认")
+                            .setMessage(date + "\n" + aMapLocation.getAoiName())
+                            .setPositiveButton("确认签到？", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent a = getIntent();
+                                    account = a.getStringArrayExtra("Account");
+                                    boolean result = false;
+                                    MysqlUpload msu = new MysqlUpload();
+                                    try {
+                                        result = msu.execute(account[0],
+                                                account[1],aMapLocation.getAoiName()).get();
+                                    }catch (ExecutionException e){
+                                        e.printStackTrace();
+                                    }catch (InterruptedException e){
+                                        e.printStackTrace();
+                                    }
+                                    if (result)
+                                        Toast.makeText(SigninActivity.this,
+                                                "Success" , Toast.LENGTH_SHORT).show();
+                                    else
+                                        Toast.makeText(SigninActivity.this,
+                                                "Failed" , Toast.LENGTH_SHORT).show();
 
-                    Toast.makeText(SigninActivity.this , "" , Toast.LENGTH_SHORT).show();
+                                }
+                            });
                 }
             });
+
 
 
 
@@ -161,53 +190,5 @@ public class SigninActivity extends AppCompatActivity implements LocationSource,
     }
 
 
-
-
 }
 
-   /* public void signClickListen(final String date,final  String name,final String signaddress) {
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-               String url = HttpUtilsHttpURLConnection.BASE_URL + "/SignServlet";
-                 Map<String, String> params = new HashMap<String, String>();
-                 Message msg = new Message();
-                Bundle data = new Bundle();
-               params.put("signtime",date);
-               params.put("name", name);
-             params.put("signaddress", signaddress);
-               String result = HttpUtilsHttpURLConnection.getContextByHttp(url, params);
-              msg.what = 0x12;
-                data.putString("result", result);
-           msg.setData(data);
-               hander.sendMessage(msg);
-           }
-  Handler hander = new Handler() {
-            @Override
-             public void handleMessage(Message msg) {
-                              if (msg.what == 0x12) {
-                                  Bundle data = msg.getData();
-                                           String key = data.getString("result");//得到json返回的json
-                                                       Toast.makeText(MainActivity.this,key,Toast.LENGTH_LONG).show();
-                                      try {
-                                               JSONObject json = new JSONObject(key);
-                                            String result = (String) json.get("result");
-                                              if ("success".equals(result)) {
-                                                            Toast.makeText(MainActivity.this,name + "签到成功！", Toast.LENGTH_SHORT).show();
-
-                                                          } else if ("error".equals(result)) {
-                                                           Toast.makeText(MainActivity.this,name + "签到失败！", Toast.LENGTH_SHORT).show();
-                                                     }
-                                              } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                      }
-                                          }
-                                }
-           };
-         }).start();
-         }
-}
-
-}
-*/

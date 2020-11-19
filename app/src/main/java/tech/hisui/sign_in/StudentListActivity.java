@@ -5,13 +5,20 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -24,19 +31,26 @@ public class StudentListActivity extends AppCompatActivity {
     public static final String CLASS_ID = "class_id";
     private List<Map<String, String>> dataList = new ArrayList<>();
     private List<Classes> class_List = new ArrayList<>();
+    private SimpleAdapter simpleAdapter;
+
     private ClassAdapter classAdapter = null;
     private ListView lvClassList;
     private String[] class_titles = null;
     private String[] class_id = null;
     private String[] teachers = null;
     private TypedArray images = null;
-
+    private String account;
     private SwipeRefreshLayout swipe;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_class);
+        setContentView(R.layout.activity_student_list_item);
+
+        lvClassList = findViewById(R.id.lv_list);
+        Intent i = getIntent();
+        account = i.getStringExtra("Account");
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -47,13 +61,33 @@ public class StudentListActivity extends AppCompatActivity {
 
         initData();
 
+        simpleAdapter = new SimpleAdapter(
+                StudentListActivity.this, dataList,
+                android.R.layout.simple_list_item_2,
+                new String[]{"course_name", "teacher"},
+                new int[]{android.R.id.text1,
+                        android.R.id.text2});
 
-        classAdapter = new ClassAdapter(StudentListActivity.this, R.layout.activity_student_list_item, class_List);
-        ListView lvClassList = findViewById(R.id.lv_class_list);
-        lvClassList.setAdapter(classAdapter);
+        lvClassList.setAdapter(simpleAdapter);
 
-        swipe = findViewById(R.id.swipe);
+        lvClassList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String[] strings = new String[2];
+                strings[0] = account;
+                strings[1] = class_id[position];
+                Toast.makeText(StudentListActivity.this, strings[1] , Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(StudentListActivity.this, SigninActivity.class);
+                intent.putExtra("data",strings);
+                startActivity(intent);
+            }
+        });
+        //classAdapter = new ClassAdapter(StudentListActivity.this, R.layout.activity_student_list_item, class_List);
+        //ListView lvClassList = findViewById(R.id.lv_class_list);
+        //lvClassList.setAdapter(classAdapter);
 
+        //swipe = findViewById(R.id.swipe);
+/*
         swipe.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
@@ -63,17 +97,10 @@ public class StudentListActivity extends AppCompatActivity {
                     }
                 }
         );
+        */
 
     }
 
-    Intent i = getIntent();
-    String account = i.getStringExtra("Account");
-
-    public void clickAlert(View view){
-        Intent intent=new Intent(   StudentListActivity.this,SigninActivity.class);
-        intent.putExtra("Account", account);
-        startActivity(intent);
-    }
 
     private void initData() {
         int length;
@@ -101,6 +128,20 @@ public class StudentListActivity extends AppCompatActivity {
         class_titles = course_name;
         class_id=course_id;
         teachers = teacher;
+
+        if(class_titles.length > teachers.length){
+            length = class_titles.length;
+        }else {
+            length = teachers.length;
+        }
+        for (int i = 0; i < length; i++){
+            Map map = new HashMap();
+            map.put("course_name", class_titles[i]);
+            map.put("teacher", teachers[i]);
+            dataList.add(map);
+        }
+
+        /*
         images = getResources().obtainTypedArray(R.array.images);
         if (class_titles.length > teachers.length) {
             length = teachers.length;
@@ -115,6 +156,7 @@ public class StudentListActivity extends AppCompatActivity {
             classes.setmImageId(images.getResourceId(i, 0));
             class_List.add(classes);
         }
+        */
     }
 
     /*
