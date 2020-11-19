@@ -20,7 +20,9 @@ public class MysqlLogin extends AsyncTask<String, Void, Boolean> {
     protected Boolean doInBackground(String... strings) {
         uname = strings[0];
         upwd = strings[1];
-        boolean aBoolean;
+        boolean aBoolean = false;
+        if (uname.equals(""))
+            return aBoolean;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(db_url, db_username,db_password);
