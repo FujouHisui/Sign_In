@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,8 @@ public class TeacherActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);//返回
         }
 
+        Intent i = getIntent();
+        String account = i.getStringExtra("Account");
 
 
         ib_class_list=(ImageButton) findViewById(R.id.teacher_class_list);

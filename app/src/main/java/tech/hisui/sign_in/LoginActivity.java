@@ -89,10 +89,12 @@ public class LoginActivity extends AppCompatActivity {
                     if (isLoggedIn[1]){
                         Intent intent=new Intent(   LoginActivity.this,
                                 TeacherActivity.class);
+                        intent.putExtra("Account",etAccount.getText().toString());
                         startActivity(intent);
                     }else {
                         Intent intent=new Intent(   LoginActivity.this,
                                 StudentListActivity.class);
+                        intent.putExtra("Account",etAccount.getText().toString());
                         startActivity(intent);
                     }
                 } else {
