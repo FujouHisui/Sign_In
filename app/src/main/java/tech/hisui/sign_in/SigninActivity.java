@@ -155,12 +155,12 @@ public class SigninActivity extends AppCompatActivity implements LocationSource,
                 @Override
                 public void onClick(View view) {
                     new AlertDialog.Builder(SigninActivity.this).setTitle("签到位置确认")
-                            .setMessage(date + "\n" + aMapLocation.getAoiName())
+                            .setMessage(aMapLocation.getAoiName())
                             .setPositiveButton("确认签到？", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent a = getIntent();
-                                    account = a.getStringArrayExtra("Account");
+                                    account = a.getStringArrayExtra("data");
                                     boolean result = false;
                                     MysqlUpload msu = new MysqlUpload();
                                     try {
@@ -179,7 +179,7 @@ public class SigninActivity extends AppCompatActivity implements LocationSource,
                                                 "Failed" , Toast.LENGTH_SHORT).show();
 
                                 }
-                            });
+                            }).show();
                 }
             });
 

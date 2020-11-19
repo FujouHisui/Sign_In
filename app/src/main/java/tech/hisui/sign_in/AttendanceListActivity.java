@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class AttendanceListActivity extends AppCompatActivity {
 
@@ -41,33 +42,53 @@ public class AttendanceListActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);//返回
         }
 
-        initDate();
+        initData();
 
 
         attendancelistAdapter = new AttendancelistAdapter(AttendanceListActivity.this, R.layout.attendance_list_item, class_List);
         ListView lvClassList = findViewById(R.id.lv_class_list);
         lvClassList.setAdapter(attendancelistAdapter);
 
-        swipe = findViewById(R.id.swipe);
+ /*         swipe = findViewById(R.id.swipe);
 
         swipe.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
+              new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
                         refreshData();
                     }
                 }
         );
-
+*/
     }
 
-    private void initDate() {
+    private void initData() {
         int length;
 
-        class_titles = getResources().getStringArray(R.array.class_titles);
-        class_id=getResources().getStringArray(R.array.class_id);
-        teachers = getResources().getStringArray(R.array.teacher);
-        images = getResources().obtainTypedArray(R.array.images);
+        String[][] str = new String[50][50];
+        String[] course_id = new String[50];
+        String[] course_name = new String[50];
+        String[] teacher = new String[50];
+        MysqlStuList msl = new MysqlStuList();
+        try {
+            str = msl.execute().get();
+            course_id = str[0];
+            course_name = str[1];
+            teacher = str[2];
+        }catch (ExecutionException e){
+            e.printStackTrace();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+        class_titles = course_name;
+        class_id = course_id;
+        teachers = teacher;
+
+        //class_titles = getResources().getStringArray(R.array.class_titles);
+        //class_id=getResources().getStringArray(R.array.class_id);
+        //teachers = getResources().getStringArray(R.array.teacher);
+        //images = getResources().obtainTypedArray(R.array.images);
         if (class_titles.length > teachers.length) {
             length = teachers.length;
         } else {
@@ -82,7 +103,7 @@ public class AttendanceListActivity extends AppCompatActivity {
             class_List.add(attendancelist);
         }
     }
-
+/*
     private void refreshData() {
         Random random = new Random();
         int index = random.nextInt(19);
@@ -99,7 +120,7 @@ public class AttendanceListActivity extends AppCompatActivity {
         attendancelistAdapter .notifyDataSetChanged();
         swipe.setRefreshing(false);
     }
-
+*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
