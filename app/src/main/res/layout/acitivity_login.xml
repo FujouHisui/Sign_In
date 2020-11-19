@@ -107,7 +107,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="15dp"
-            android:layout_weight="1"
             android:text="用户注册"
             android:textColor="@color/colorPrimaryDark"
             android:layout_marginStart="275dp"
@@ -119,7 +118,6 @@
             android:id="@+id/cbRemember_pwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="记住密码"
             android:textColor="@color/colorPrimaryDark"
             android:layout_alignParentTop="true"
@@ -140,7 +138,7 @@
         android:layout_marginStart="10dp">
 
         <Spinner
-            android:id="@+id/job"
+            android:id="@+id/spJob"
             android:prompt="@string/job_label"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -173,7 +171,7 @@
             android:background="#E35656"
             android:layout_centerHorizontal="true"
             android:text="登录"
-            android:textSize="23dp"
+            android:textSize="23sp"
             android:textColor="@android:color/white" />
     </RelativeLayout>
 

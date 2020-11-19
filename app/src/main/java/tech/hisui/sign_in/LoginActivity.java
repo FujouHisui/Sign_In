@@ -1,62 +1,95 @@
 package tech.hisui.sign_in;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.MenuItem;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private ImageButton ib_student_select;
-    private ImageButton ib_teacher_select;
+
+    private Boolean bPwdSwitch = false;
+    private EditText etPwd;
+    private EditText etAccount;
+    private CheckBox cbRemember_pwd;
+    private Button btLogin;
+    private Spinner spSwitch;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_select);
-        ib_student_select=(ImageButton) findViewById(R.id.student_select);
-        ib_teacher_select=(ImageButton) findViewById(R.id.teacher_select);
-        ib_student_select.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.acitivity_login);
+
+        final ImageView ivPwdSwitch = findViewById(R.id.iv_pwd_switch);
+        etPwd = findViewById(R.id.et_pwd);
+        etAccount = findViewById(R.id.et_Account);
+        cbRemember_pwd = findViewById(R.id.cbRemember_pwd);
+        btLogin = findViewById(R.id.bt_login);
+        spSwitch = findViewById(R.id.spJob);
+
+
+        ivPwdSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bPwdSwitch = !bPwdSwitch;
+                if (bPwdSwitch){
+                    ivPwdSwitch.setImageResource(R.drawable.ic_baseline_visibility_24);
+                    etPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                }
+                else {
+                    etPwd.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
+                    etPwd.setTypeface(Typeface.DEFAULT);
+                }
+            }
+
+        });
+
+        btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //对于下面的两个参数，分别代表本页面和跳转页面的参数，不过要注意本页面的是用this，要跳转到的页面是class
-                if(v==ib_student_select)
-                {
-                    Intent intent=new Intent(   LoginActivity.this,StudentActivity.class);
-                    startActivity(intent);
+                boolean isLoggedIn = false;
+                MysqlLogin mss = new MysqlLogin();
+                try {
+                    isLoggedIn = mss.execute(etAccount.getText().toString(), etPwd.getText().toString()).get();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
+                if (isLoggedIn) {
+                    Toast.makeText(LoginActivity.this, "Logged in!",
+                            Toast.LENGTH_SHORT).show();
+                    if (spSwitch.getSelectedItemId() == 0){
+                        Intent intent=new Intent(   LoginActivity.this,
+                                TeacherActivity.class);
+                        startActivity(intent);
+                    }else {
+                        Intent intent=new Intent(   LoginActivity.this,
+                                StudentActivity.class);
+                        startActivity(intent);
+                    }
+                }
+                else {
+                    Toast.makeText(LoginActivity.this, "Error!",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-        ib_teacher_select.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //对于下面的两个参数，分别代表本页面和跳转页面的参数，不过要注意本页面的是用this，要跳转到的页面是class
-                if(v==ib_teacher_select)
-                {
-                    Intent intent=new Intent(   LoginActivity.this,TeacherActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
-
     }
-
-
-
-
-
-
 
 
 }
