@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class MysqlUpload extends AsyncTask<String, Void, Boolean> {
+public class MysqlReg extends AsyncTask<String, Void, Boolean> {
 
     private static final String db_url = "jdbc:mysql://47.111.11.245:3306/sign_in";
     private static final String db_username = "root";
@@ -26,16 +26,19 @@ public class MysqlUpload extends AsyncTask<String, Void, Boolean> {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(db_url, db_username,db_password);
             Statement st = con.createStatement();
-            if (uname.equals("") || st.executeQuery("SELECT `user`.username, `user`.`password` FROM `user` WHERE user.username='" + uname + "';").next()){
+            if (uname.equals("") || st.executeQuery("SELECT `user`.username, " +
+                    "`user`.`password` FROM `user` WHERE user.username='" + uname + "';").next()){
                 return aBoolean;
             }
             String sql = "INSERT INTO user(username, `password`) VALUES ('"
                     + uname + "' , '" + upwd + "');";
             st.execute(sql);
-            sql = "SELECT `user`.username, `user`.`password` FROM `user` WHERE user.username='" + uname + "';";
+            sql = "SELECT `user`.username, `user`.`password` " +
+                    "FROM `user` WHERE user.username='" + uname + "';";
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()){
-                if (rs.getString("username").equals(uname) && rs.getString("password").equals(upwd)) {
+                if (rs.getString("username").equals(uname) &&
+                        rs.getString("password").equals(upwd)) {
                     rs.close();
                     st.close();
                     con.close();

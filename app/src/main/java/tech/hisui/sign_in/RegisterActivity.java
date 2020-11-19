@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean result = false;
-                MysqlUpload msu = new MysqlUpload();
+                MysqlReg msu = new MysqlReg();
                 try {
                     result = msu.execute(etAccount.getText().toString(),
                             etPwd.getText().toString()).get();
