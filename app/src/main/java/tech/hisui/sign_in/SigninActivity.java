@@ -1,6 +1,7 @@
 package tech.hisui.sign_in;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 //import android.support.v7.app.AlertDialog;
@@ -91,6 +92,9 @@ public class SigninActivity extends AppCompatActivity implements LocationSource,
         mLocationClient.startLocation();
 
     }
+
+    Intent i = getIntent();
+    String account = i.getStringExtra("Account");
 
     private void init() {
         if (aMap == null) {

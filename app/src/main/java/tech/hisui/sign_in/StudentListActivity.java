@@ -1,8 +1,10 @@
 package tech.hisui.sign_in;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 
 import androidx.appcompat.app.ActionBar;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class StudentListActivity extends AppCompatActivity {
 
@@ -41,7 +44,8 @@ public class StudentListActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);//返回
         }
 
-        initDate();
+
+        initData();
 
 
         classAdapter = new ClassAdapter(StudentListActivity.this, R.layout.activity_student_list_item, class_List);
@@ -54,19 +58,49 @@ public class StudentListActivity extends AppCompatActivity {
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-                        refreshData();
+                        //refreshData();
+
                     }
                 }
         );
 
     }
 
-    private void initDate() {
-        int length;
+    Intent i = getIntent();
+    String account = i.getStringExtra("Account");
 
-        class_titles = getResources().getStringArray(R.array.class_titles);
-        class_id=getResources().getStringArray(R.array.class_id);
-        teachers = getResources().getStringArray(R.array.teacher);
+    public void clickAlert(View view){
+        Intent intent=new Intent(   StudentListActivity.this,SigninActivity.class);
+        intent.putExtra("Account", account);
+        startActivity(intent);
+    }
+
+    private void initData() {
+        int length;
+        String[][] str = new String[50][50];
+        String[] course_id = new String[50];
+        String[] course_name = new String[50];
+        String[] teacher = new String[50];
+        MysqlStuList msl = new MysqlStuList();
+        try {
+            str = msl.execute().get();
+            course_id = str[0];
+            course_name = str[1];
+            teacher = str[2];
+        }catch (ExecutionException e){
+            e.printStackTrace();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+
+        //class_titles = getResources().getStringArray(R.array.class_titles);
+        //class_id=getResources().getStringArray(R.array.class_id);
+        //teachers = getResources().getStringArray(R.array.teacher);
+        //
+        class_titles = course_name;
+        class_id=course_id;
+        teachers = teacher;
         images = getResources().obtainTypedArray(R.array.images);
         if (class_titles.length > teachers.length) {
             length = teachers.length;
@@ -83,6 +117,7 @@ public class StudentListActivity extends AppCompatActivity {
         }
     }
 
+    /*
     private void refreshData() {
         Random random = new Random();
         int index = random.nextInt(19);
@@ -99,6 +134,7 @@ public class StudentListActivity extends AppCompatActivity {
         classAdapter.notifyDataSetChanged();
         swipe.setRefreshing(false);
     }
+*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

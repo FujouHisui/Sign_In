@@ -45,7 +45,7 @@ public class ClassListActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);//返回
         }
 
-        initDate();
+        initData();
 
 
         classAdapter = new ClassAdapter(ClassListActivity.this, R.layout.activity_class_list_item, class_List);
@@ -58,7 +58,7 @@ public class ClassListActivity extends AppCompatActivity {
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-                        refreshData();
+                        //refreshData();
                     }
                 }
         );
@@ -71,7 +71,7 @@ public class ClassListActivity extends AppCompatActivity {
     }
 
 
-    private void initDate() {
+    private void initData() {
         int length;
 
         class_titles = getResources().getStringArray(R.array.class_titles);
