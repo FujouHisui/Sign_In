@@ -1,11 +1,14 @@
 package tech.hisui.sign_in;
 
 import android.app.Activity;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 //import android.support.v7.app.AlertDialog;
 //import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,10 +23,6 @@ import com.amap.api.maps2d.MapView;
 import com.amap.api.maps2d.UiSettings;
 import com.amap.api.maps2d.model.LatLng;
 //import com.cqvie.options.HttpUtilsHttpURLConnection;
-
-import org.json.JSONException;
-
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SigninActivity extends AppCompatActivity implements LocationSource,AMapLocationListener {
@@ -31,11 +30,25 @@ public class SigninActivity extends AppCompatActivity implements LocationSource,
     private MapView mapView = null;
     private AMap aMap;
     private Button request;
+    private AMapLocationClient mapLocationClient;
     private AMapLocationClientOption mLocationOption;
     private OnLocationChangedListener mListener;
     //标识，用于判断是否只显示一次定位信息和用户重新定位
     private boolean isFirstLoc = true;
     String date = null;
+
+
+    //激活定位
+    @Override
+    public void activate(OnLocationChangedListener onLocationChangedListener) {
+        mListener = onLocationChangedListener;
+    }
+
+    @Override
+    public void deactivate() {
+        mListener = null;
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,26 +102,6 @@ public class SigninActivity extends AppCompatActivity implements LocationSource,
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
-        mapView.onDestroy();
-    }
-
-    @Override
-    protected void onResume() {
-
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-
-        super.onPause();
-        mapView.onPause();
-    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -149,24 +142,24 @@ public class SigninActivity extends AppCompatActivity implements LocationSource,
                 Log.e("HLQ_Struggle", "Location Error,errCode: " + aMapLocation.getErrorCode() + ",errInfo:" + aMapLocation.getErrorInfo());
             }
 
+            request = (Button)findViewById(R.id.request);
+            request.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Toast.makeText(SigninActivity.this , "" , Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+
         }
     }
 
 
-    //激活定位
-    @Override
-    public void activate(OnLocationChangedListener onLocationChangedListener) {
-        mListener = onLocationChangedListener;
 
-    }
 
-    @Override
-    public void deactivate() {
-        mListener = null;
-
-    }
 }
-
 
    /* public void signClickListen(final String date,final  String name,final String signaddress) {
         new Thread(new Runnable() {
@@ -174,7 +167,7 @@ public class SigninActivity extends AppCompatActivity implements LocationSource,
             @Override
             public void run() {
                String url = HttpUtilsHttpURLConnection.BASE_URL + "/SignServlet";
-                Map<String, String> params = new HashMap<String, String>();
+                 Map<String, String> params = new HashMap<String, String>();
                  Message msg = new Message();
                 Bundle data = new Bundle();
                params.put("signtime",date);

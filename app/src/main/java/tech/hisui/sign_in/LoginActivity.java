@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
                 //对于下面的两个参数，分别代表本页面和跳转页面的参数，不过要注意本页面的是用this，要跳转到的页面是class
                 if(v==ib_student_select)
                 {
-                    Intent intent=new Intent(   LoginActivity.this,StudentActivity.class);
+                    Intent intent=new Intent(   LoginActivity.this,ClassListActivity.class);
                     startActivity(intent);
                 }
             }
