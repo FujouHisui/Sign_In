@@ -15,11 +15,14 @@ public class MysqlReg extends AsyncTask<String, Void, Boolean> {
     private static final String db_password = "233cb6177f0d";
     String uname = null;
     String upwd = null;
+    int ujob;
 
     @Override
     protected Boolean doInBackground(String... strings) {
         uname = strings[0];
         upwd = strings[1];
+        ujob = Integer.parseInt(strings[2]);
+
         boolean aBoolean = false;
 
         try {
@@ -30,8 +33,8 @@ public class MysqlReg extends AsyncTask<String, Void, Boolean> {
                     "`user`.`password` FROM `user` WHERE user.username='" + uname + "';").next()){
                 return aBoolean;
             }
-            String sql = "INSERT INTO user(username, `password`) VALUES ('"
-                    + uname + "' , '" + upwd + "');";
+            String sql = "INSERT INTO user(username, `password`, job) VALUES ('"
+                    + uname + "' , '" + upwd +"' , '" + ujob + "');";
             st.execute(sql);
             sql = "SELECT `user`.username, `user`.`password` " +
                     "FROM `user` WHERE user.username='" + uname + "';";

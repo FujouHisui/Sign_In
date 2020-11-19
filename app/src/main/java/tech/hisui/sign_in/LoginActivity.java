@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etAccount;
     private CheckBox cbRemember_pwd;
     private Button btLogin;
-    private Spinner spSwitch;
+    //private Spinner spSwitch;
     private TextView tvReg;
 
 
@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         etAccount = findViewById(R.id.et_Account);
         cbRemember_pwd = findViewById(R.id.cbRemember_pwd);
         btLogin = findViewById(R.id.bt_login);
-        spSwitch = findViewById(R.id.spJob);
+        //spSwitch = findViewById(R.id.spJob);
         tvReg = findViewById(R.id.tv_register);
 
 
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isLoggedIn = false;
+                Boolean[] isLoggedIn = new Boolean[2];
                 MysqlLogin msl = new MysqlLogin();
                 try {
                     isLoggedIn = msl.execute(etAccount.getText().toString(),
@@ -83,10 +83,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
 
-                if (isLoggedIn) {
+                if (isLoggedIn[0]) {
                     Toast.makeText(LoginActivity.this, "Logged in!",
                             Toast.LENGTH_SHORT).show();
-                    if (spSwitch.getSelectedItemId() == 0){
+                    if (isLoggedIn[1]){
                         Intent intent=new Intent(   LoginActivity.this,
                                 TeacherActivity.class);
                         startActivity(intent);
@@ -95,8 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                                 StudentListActivity.class);
                         startActivity(intent);
                     }
-                }
-                else {
+                } else {
                     Toast.makeText(LoginActivity.this, "Error!",
                             Toast.LENGTH_SHORT).show();
                 }

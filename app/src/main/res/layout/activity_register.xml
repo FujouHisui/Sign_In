@@ -92,30 +92,29 @@
 
 
 
-    <!--
+
     <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginStart="10dp">
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="10dp">
 
-
-    <Spinnndroid:id="@+id/job"
-        android:prompt="@string/job_label"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:entries="@array/job_name"
-        android:layout_marginStart="150dp"
-        android:layout_marginEnd="70dp"
-        />
+        <Spinner
+            android:id="@+id/sp_job"
+            android:prompt="@string/job_label"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:entries="@array/job_name"
+            android:layout_marginStart="150dp"
+            android:layout_marginEnd="70dp"
+            />
 
 
 
 </RelativeLayout>
 
--->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -134,7 +133,7 @@
             android:layout_marginEnd="50dp"
             android:background="#E35656"
             android:text="注册"
-            android:textSize="23dp"
+            android:textSize="23sp"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/white" />
     </RelativeLayout>

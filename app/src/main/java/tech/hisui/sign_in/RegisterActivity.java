@@ -22,6 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etPwd;
     private EditText etAccount;
     private Button btRegister;
+    private Spinner sp_job;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
         etPwd = findViewById(R.id.et_pwd);
         etAccount = findViewById(R.id.et_Account);
         btRegister = findViewById(R.id.bt_register);
+        sp_job = findViewById(R.id.sp_job);
 
 
         ivPwdSwitch.setOnClickListener(new View.OnClickListener() {
@@ -56,8 +58,8 @@ public class RegisterActivity extends AppCompatActivity {
                 boolean result = false;
                 MysqlReg msu = new MysqlReg();
                 try {
-                    result = msu.execute(etAccount.getText().toString(),
-                            etPwd.getText().toString()).get();
+                    result = msu.execute(etAccount.getText().toString(), etPwd.getText().toString(),
+                            String.valueOf(sp_job.getSelectedItemId())).get();
                 }catch (ExecutionException e){
                     e.printStackTrace();
                 }catch (InterruptedException e){

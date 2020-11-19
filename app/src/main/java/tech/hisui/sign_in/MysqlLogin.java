@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class MysqlLogin extends AsyncTask<String, Void, Boolean> {
+public class MysqlLogin extends AsyncTask<String, Void, Boolean[]> {
 
     private static final String db_url = "jdbc:mysql://47.111.11.245:3306/sign_in";
     private static final String db_username = "root";
@@ -17,27 +17,37 @@ public class MysqlLogin extends AsyncTask<String, Void, Boolean> {
     String upwd = null;
 
     @Override
-    protected Boolean doInBackground(String... strings) {
+    protected Boolean[] doInBackground(String... strings) {
         uname = strings[0];
         upwd = strings[1];
-        boolean aBoolean = false;
+        Boolean[] aBoolean = new Boolean[2];
         if (uname.equals(""))
             return aBoolean;
         try {
+            aBoolean[0] = false;
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(db_url, db_username,db_password);
             Statement st = con.createStatement();
-            String sql = "SELECT password FROM `user` WHERE user.username = \"" + uname + "\";";
+            String sql = "SELECT job FROM `user` WHERE user.username = '" + uname + "';";
             ResultSet rs = st.executeQuery(sql);
+            if (rs.next()){
+                if (rs.getInt("job") == 0)
+                    aBoolean[1] = true;
+                else
+                    aBoolean[1] = false;
+            }
+            sql = "SELECT password FROM `user` WHERE user.username = '" + uname + "';";
+            rs = st.executeQuery(sql);
             if (rs.next()){
                 if (rs.getString("password").equals(upwd)) {
                     rs.close();
                     st.close();
                     con.close();
-                    aBoolean = true;
+                    aBoolean[0] = true;
                     return aBoolean;
                 }
             }
+            aBoolean[0] = false;
             rs.close();
             st.close();
             con.close();
@@ -46,12 +56,11 @@ public class MysqlLogin extends AsyncTask<String, Void, Boolean> {
         }catch (Exception e){
             e.printStackTrace();
         }
-        aBoolean = false;
         return aBoolean;
     }
 
     @Override
-    protected void onPostExecute(Boolean aBoolean) {
+    protected void onPostExecute(Boolean[] aBoolean) {
         super.onPostExecute(aBoolean);
     }
 }

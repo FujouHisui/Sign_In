@@ -45,7 +45,7 @@
             android:layout_marginStart="90dp"
             android:layout_marginEnd="70dp"
             android:layout_marginBottom="-3dp"
-            android:hint="Email/Account"
+            android:hint="学号/工号"
             android:inputType="text"
             android:maxLines="1" />
     </RelativeLayout>
@@ -127,52 +127,50 @@
 
             />
 
-
-
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="10dp">
+    <!--
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="10dp">
 
-        <Spinner
-            android:id="@+id/spJob"
-            android:prompt="@string/job_label"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:entries="@array/job_name"
-            android:layout_marginStart="150dp"
-            android:layout_marginEnd="70dp"
-            />
+    <Spinnedroid:id="@+id/spJob"
+        android:prompt="@string/job_label"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:entries="@array/job_name"
+        android:layout_marginStart="150dp"
+        android:layout_marginEnd="70dp"
+        />
 
+</RelativeLayout>
+-->
 
-    </RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginBottom="32dp"
+    android:layout_weight="1">
 
-    <RelativeLayout
+    <Button
+        android:id="@+id/bt_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="32dp"
-        android:layout_weight="1">
-
-        <Button
-            android:id="@+id/bt_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="50dp"
-            android:background="#E35656"
-            android:layout_centerHorizontal="true"
-            android:text="登录"
-            android:textSize="23sp"
-            android:textColor="@android:color/white" />
-    </RelativeLayout>
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="50dp"
+        android:background="#E35656"
+        android:layout_centerHorizontal="true"
+        android:text="登录"
+        android:textSize="23sp"
+        android:textColor="@android:color/white" />
+</RelativeLayout>
 
 </LinearLayout>
