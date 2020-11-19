@@ -1,17 +1,39 @@
 package tech.hisui.sign_in;
 
 import android.app.AppComponentFactory;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class AttendanceListActivity extends AppCompatActivity {
 
+    private static final String CLASS_TITLE = "class_title";
+    private static final String TEACHER = "teacher";
+    public static final String CLASS_ID = "class_id";
+    private List<Map<String, String>> dataList = new ArrayList<>();
+    private List<Attendancelist> class_List = new ArrayList<>();
+    private AttendancelistAdapter attendancelistAdapter= null;
+    private ListView lvClassList;
+    private String[] class_titles = null;
+    private String[] class_id = null;
+    private String[] teachers = null;
+    private TypedArray images = null;
+
+    private SwipeRefreshLayout swipe;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.attendance_list);
+        setContentView(R.layout.attendance);
 
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){
@@ -19,7 +41,65 @@ public class AttendanceListActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);//返回
         }
 
+        initDate();
+
+
+        attendancelistAdapter = new AttendancelistAdapter(AttendanceListActivity.this, R.layout.attendance_list_item, class_List);
+        ListView lvClassList = findViewById(R.id.lv_class_list);
+        lvClassList.setAdapter(attendancelistAdapter);
+
+        swipe = findViewById(R.id.swipe);
+
+        swipe.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        refreshData();
+                    }
+                }
+        );
+
     }
+
+    private void initDate() {
+        int length;
+
+        class_titles = getResources().getStringArray(R.array.class_titles);
+        class_id=getResources().getStringArray(R.array.class_id);
+        teachers = getResources().getStringArray(R.array.teacher);
+        images = getResources().obtainTypedArray(R.array.images);
+        if (class_titles.length > teachers.length) {
+            length = teachers.length;
+        } else {
+            length = class_titles.length;
+        }
+        for (int i = 0; i < length; i++) {
+            Attendancelist attendancelist= new Attendancelist();
+            attendancelist.setCLASS_Title(class_titles[i]);
+            attendancelist.setClass_id(class_id[i]);
+            attendancelist.setmTeacher(teachers[i]);
+            attendancelist.setmImageId(images.getResourceId(i, 0));
+            class_List.add(attendancelist);
+        }
+    }
+
+    private void refreshData() {
+        Random random = new Random();
+        int index = random.nextInt(19);
+
+        Attendancelist attendancelist = new Attendancelist();
+
+        attendancelist.setCLASS_Title(class_titles[index]);
+        attendancelist.setClass_id(class_id[index]);
+        attendancelist.setmTeacher(teachers[index]);
+        attendancelist.setmImageId(images.getResourceId(index, -1));
+
+
+        attendancelistAdapter .insert(attendancelist, 0);
+        attendancelistAdapter .notifyDataSetChanged();
+        swipe.setRefreshing(false);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
