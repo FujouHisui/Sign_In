@@ -62,7 +62,8 @@ public class LoginActivity extends AppCompatActivity {
                 boolean isLoggedIn = false;
                 MysqlLogin mss = new MysqlLogin();
                 try {
-                    isLoggedIn = mss.execute(etAccount.getText().toString(), etPwd.getText().toString()).get();
+                    isLoggedIn = mss.execute(etAccount.getText().toString(),
+                            etPwd.getText().toString()).get();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -79,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                     }else {
                         Intent intent=new Intent(   LoginActivity.this,
-                                StudentActivity.class);
+                                StudentListActivity.class);
                         startActivity(intent);
                     }
                 }

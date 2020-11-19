@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class StudentActivity extends AppCompatActivity {
+public class StudentListActivity extends AppCompatActivity {
 
     private static final String CLASS_TITLE = "class_title";
     private static final String TEACHER = "teacher";
@@ -44,7 +44,7 @@ public class StudentActivity extends AppCompatActivity {
         initDate();
 
 
-        classAdapter = new ClassAdapter(StudentActivity.this, R.layout.activity_student_list_item, class_List);
+        classAdapter = new ClassAdapter(StudentListActivity.this, R.layout.activity_student_list_item, class_List);
         ListView lvClassList = findViewById(R.id.lv_class_list);
         lvClassList.setAdapter(classAdapter);
 
