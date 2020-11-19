@@ -2,6 +2,7 @@ package tech.hisui.sign_in;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -66,10 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (result) {
                     Toast.makeText(RegisterActivity.this, "Succeed!",
                             Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(RegisterActivity.this,
-                            LoginActivity.class);
-                    startActivity(intent);
+                    RegisterActivity.this.finish();
                 }else {
                     Toast.makeText(RegisterActivity.this, "Error!",
                             Toast.LENGTH_SHORT).show();
