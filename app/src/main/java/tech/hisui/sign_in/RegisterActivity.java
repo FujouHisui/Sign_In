@@ -12,35 +12,25 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.concurrent.ExecutionException;
 
-public class LoginActivity extends AppCompatActivity {
-
-
+public class RegisterActivity extends AppCompatActivity {
     private Boolean bPwdSwitch = false;
     private EditText etPwd;
     private EditText etAccount;
-    private CheckBox cbRemember_pwd;
-    private Button btLogin;
-    private Spinner spSwitch;
-    private TextView tvReg;
-
+    private Button btRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acitivity_login);
 
+        setContentView(R.layout.activity_register);
         final ImageView ivPwdSwitch = findViewById(R.id.iv_pwd_switch);
         etPwd = findViewById(R.id.et_pwd);
         etAccount = findViewById(R.id.et_Account);
-        cbRemember_pwd = findViewById(R.id.cbRemember_pwd);
-        btLogin = findViewById(R.id.bt_login);
-        spSwitch = findViewById(R.id.spJob);
-        tvReg = findViewById(R.id.tv_register);
+        btRegister = findViewById(R.id.bt_register);
 
 
         ivPwdSwitch.setOnClickListener(new View.OnClickListener() {
@@ -59,50 +49,33 @@ public class LoginActivity extends AppCompatActivity {
 
         });
 
-        tvReg.setOnClickListener(new View.OnClickListener() {
+        btRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(   LoginActivity.this,
-                        RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isLoggedIn = false;
-                MysqlLogin msl = new MysqlLogin();
+                boolean result = false;
+                MysqlUpload msu = new MysqlUpload();
                 try {
-                    isLoggedIn = msl.execute(etAccount.getText().toString(),
+                    result = msu.execute(etAccount.getText().toString(),
                             etPwd.getText().toString()).get();
-                } catch (ExecutionException e) {
+                }catch (ExecutionException e){
                     e.printStackTrace();
-                } catch (InterruptedException e) {
+                }catch (InterruptedException e){
                     e.printStackTrace();
                 }
 
-
-                if (isLoggedIn) {
-                    Toast.makeText(LoginActivity.this, "Logged in!",
+                if (result) {
+                    Toast.makeText(RegisterActivity.this, "Succeed!",
                             Toast.LENGTH_SHORT).show();
-                    if (spSwitch.getSelectedItemId() == 0){
-                        Intent intent=new Intent(   LoginActivity.this,
-                                TeacherActivity.class);
-                        startActivity(intent);
-                    }else {
-                        Intent intent=new Intent(   LoginActivity.this,
-                                StudentListActivity.class);
-                        startActivity(intent);
-                    }
-                }
-                else {
-                    Toast.makeText(LoginActivity.this, "Error!",
+
+                    Intent intent = new Intent(RegisterActivity.this,
+                            LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(RegisterActivity.this, "Error!",
                             Toast.LENGTH_SHORT).show();
                 }
             }
+
         });
     }
-
-
 }
