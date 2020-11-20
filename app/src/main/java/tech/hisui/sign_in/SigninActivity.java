@@ -41,7 +41,8 @@ public class SigninActivity extends AppCompatActivity implements LocationSource,
     private boolean isFirstLoc = true;
     String date = null;
 
-    private String[] account = new String[2];
+    private String stu_id;
+    private String class_id;
 
     //激活定位
     @Override
@@ -150,6 +151,9 @@ public class SigninActivity extends AppCompatActivity implements LocationSource,
                 Log.e("HLQ_Struggle", "Location Error,errCode: " + aMapLocation.getErrorCode() + ",errInfo:" + aMapLocation.getErrorInfo());
             }
 
+            Intent a = getIntent();
+            stu_id = a.getStringExtra("stu_id");
+            class_id = a.getStringExtra("class_id");
             request = (Button)findViewById(R.id.request);
             request.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -159,13 +163,14 @@ public class SigninActivity extends AppCompatActivity implements LocationSource,
                             .setPositiveButton("确认签到？", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Intent a = getIntent();
-                                    account = a.getStringArrayExtra("data");
+
                                     boolean result = false;
                                     MysqlUpload msu = new MysqlUpload();
                                     try {
-                                        result = msu.execute(account[0],
-                                                account[1],aMapLocation.getAoiName()).get();
+
+
+                                        result = msu.execute(stu_id,
+                                                class_id,aMapLocation.getAoiName()).get();
                                     }catch (ExecutionException e){
                                         e.printStackTrace();
                                     }catch (InterruptedException e){

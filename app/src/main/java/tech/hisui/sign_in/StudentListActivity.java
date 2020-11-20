@@ -73,12 +73,11 @@ public class StudentListActivity extends AppCompatActivity {
         lvClassList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String[] strings = new String[2];
-                strings[0] = account;
-                strings[1] = class_id[position];
-                Toast.makeText(StudentListActivity.this, strings[1] , Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(StudentListActivity.this, class_id[position] , Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(StudentListActivity.this, SigninActivity.class);
-                intent.putExtra("data",strings);
+                intent.putExtra("stu_id",account);
+                intent.putExtra("class_id",class_id[position]);
                 startActivity(intent);
             }
         });
