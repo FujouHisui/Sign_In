@@ -1,16 +1,22 @@
 package tech.hisui.sign_in;
 
 import android.app.AppComponentFactory;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -22,19 +28,23 @@ public class AttendanceListActivity extends AppCompatActivity {
     private static final String TEACHER = "teacher";
     public static final String CLASS_ID = "class_id";
     private List<Map<String, String>> dataList = new ArrayList<>();
-    private List<Attendancelist> class_List = new ArrayList<>();
-    private AttendancelistAdapter attendancelistAdapter= null;
-    private ListView lvClassList;
-    private String[] class_titles = null;
-    private String[] class_id = null;
-    private String[] teachers = null;
-    private TypedArray images = null;
+    private SimpleAdapter simpleAdapter;
+    private ListView lvAttendance;
+    private String[] stu_str = null;
+    private String[] time_str = null;
+    private String[] position_str = null;
+    private String class_id;
 
     private SwipeRefreshLayout swipe;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.attendance);
+        setContentView(R.layout.attendance_list);
+        lvAttendance = findViewById(R.id.lv_attendance);
+
+        Intent a = getIntent();
+        class_id = a.getStringExtra("data");
+
 
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){
@@ -45,9 +55,22 @@ public class AttendanceListActivity extends AppCompatActivity {
         initData();
 
 
-        attendancelistAdapter = new AttendancelistAdapter(AttendanceListActivity.this, R.layout.attendance_list_item, class_List);
-        ListView lvClassList = findViewById(R.id.lv_class_list);
-        lvClassList.setAdapter(attendancelistAdapter);
+        simpleAdapter = new SimpleAdapter(
+                AttendanceListActivity.this, dataList,
+                android.R.layout.simple_list_item_2,
+                new String[]{"stu_id", "time"},
+                new int[]{android.R.id.text1,
+                        android.R.id.text2});
+
+        lvAttendance.setAdapter(simpleAdapter);
+
+        lvAttendance.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(AttendanceListActivity.this, position_str[position], Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
  /*         swipe = findViewById(R.id.swipe);
 
@@ -62,46 +85,45 @@ public class AttendanceListActivity extends AppCompatActivity {
 */
     }
 
+
     private void initData() {
         int length;
-
-        String[][] str = new String[50][50];
-        String[] course_id = new String[50];
-        String[] course_name = new String[50];
-        String[] teacher = new String[50];
-        MysqlStuList msl = new MysqlStuList();
+        String[][] str;
+        String[] stu_id = new String[50];
+        String[] time = new String[50];
+        String[] position = new String[50];
+        MysqlAttendanceList msa = new MysqlAttendanceList();
         try {
-            str = msl.execute().get();
-            course_id = str[0];
-            course_name = str[1];
-            teacher = str[2];
+            str = msa.execute(class_id).get();
+            stu_id = str[0];
+            time = str[1];
+            position = str[2];
         }catch (ExecutionException e){
             e.printStackTrace();
         }catch (InterruptedException e){
             e.printStackTrace();
         }
 
-        class_titles = course_name;
-        class_id = course_id;
-        teachers = teacher;
+        stu_str = stu_id;
+        time_str= time;
+        position_str = position;
 
         //class_titles = getResources().getStringArray(R.array.class_titles);
         //class_id=getResources().getStringArray(R.array.class_id);
         //teachers = getResources().getStringArray(R.array.teacher);
         //images = getResources().obtainTypedArray(R.array.images);
-        if (class_titles.length > teachers.length) {
-            length = teachers.length;
-        } else {
-            length = class_titles.length;
+        if(stu_str.length > time_str.length){
+            length = stu_str.length;
+        }else {
+            length = time_str.length;
         }
-        for (int i = 0; i < length; i++) {
-            Attendancelist attendancelist= new Attendancelist();
-            attendancelist.setCLASS_Title(class_titles[i]);
-            attendancelist.setClass_id(class_id[i]);
-            attendancelist.setmTeacher(teachers[i]);
-            attendancelist.setmImageId(images.getResourceId(i, 0));
-            class_List.add(attendancelist);
+        for (int i = 0; i < length; i++){
+            Map map = new HashMap();
+            map.put("stu_id", stu_str[i]);
+            map.put("time", time_str[i]);
+            dataList.add(map);
         }
+
     }
 /*
     private void refreshData() {

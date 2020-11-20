@@ -37,11 +37,11 @@ public class TeacherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             //对于下面的两个参数，分别代表本页面和跳转页面的参数，不过要注意本页面的是用this，要跳转到的页面是class
-                if(v==ib_class_list)
+/*                if(v==ib_class_list)
                 {
                     Intent intent=new Intent(   TeacherActivity.this,ClassListActivity.class);
                     startActivity(intent);
-                }
+                }*/
             }
         });
 
@@ -61,7 +61,7 @@ public class TeacherActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(view==ib_list)
                 {
-                    Intent intent=new Intent(   TeacherActivity.this,AttendanceListActivity.class);
+                    Intent intent=new Intent(   TeacherActivity.this,ClassListActivity.class);
                     startActivity(intent);
                 }
             }

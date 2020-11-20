@@ -27,21 +27,21 @@ public class ClassListActivity extends AppCompatActivity {
     private static final String TEACHER = "teacher";
     public static final String CLASS_ID = "class_id";
     private List<Map<String, String>> dataList = new ArrayList<>();
-    private List<Classes> class_List = new ArrayList<>();
-    private ClassAdapter classAdapter = null;
     private ListView lvClassList;
     private String[] class_titles = null;
     private String[] class_id = null;
     private String[] teachers = null;
-    private TypedArray images = null;
     private SimpleAdapter simpleAdapter;
 
     private SwipeRefreshLayout swipe;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_list_item);
+        setContentView(R.layout.activity_class);
+
+        lvClassList = findViewById(R.id.lv_class_list);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -64,10 +64,12 @@ public class ClassListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String str = class_id[position];
-                Toast.makeText(ClassListActivity.this, str , Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ClassListActivity.this, AttendanceListActivity.class);
+
+                Intent intent = new Intent(ClassListActivity.this,
+                        AttendanceListActivity.class);
                 intent.putExtra("data",str);
                 startActivity(intent);
+                //Toast.makeText(ClassListActivity.this, str , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -87,12 +89,6 @@ public class ClassListActivity extends AppCompatActivity {
         );
 */
 }
-
-    public void clickAlert(View view){
-        Intent intent=new Intent(   ClassListActivity.this,SigninActivity.class);
-        startActivity(intent);
-
-    }
 
 
     private void initData() {

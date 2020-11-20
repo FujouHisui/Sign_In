@@ -1,44 +1,32 @@
 package tech.hisui.sign_in;
 
 public class Attendancelist {
-    private String CLASS_Title;
-    private String class_id;
-    private String mTeacher;
-    private String mContent;
-    private int mImageId;
+    private String mTime;
+    private String mStudent;
+    private String mPosition;
 
-    public String getCLASS_Title() {
-        return CLASS_Title;
-    }
-    public void setCLASS_Title(String title) {
-        this.CLASS_Title = title;
+
+    public String getTime() {
+        return mTime;
     }
 
-    public String getClass_id() {
-        return class_id;
-    }
-    public void setClass_id(String id) {
-        this.class_id = id;
+    public void setTime(String time) {
+        this.mTime = time;
     }
 
-    public String getmTeacher() {
-        return mTeacher;
-    }
-    public void setmTeacher(String mTeacher) {
-        this.mTeacher = mTeacher;
+    public String getStu_id() {
+        return mStudent;
     }
 
-    public String getmContent(String s) {
-        return mContent;
-    }
-    public void setmContent(String mContent) {
-        this.mContent = mContent;
+    public void setStu_id(String id) {
+        this.mStudent = id;
     }
 
-    public int getmImageId() {
-        return mImageId;
+    public String getPosition() {
+        return mPosition;
     }
-    public void setmImageId(int mImageId) {
-        this.mImageId = mImageId;
+
+    public void setPosition(String position) {
+        this.mPosition = position;
     }
 }

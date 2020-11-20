@@ -30,15 +30,12 @@ public class StudentListActivity extends AppCompatActivity {
     private static final String TEACHER = "teacher";
     public static final String CLASS_ID = "class_id";
     private List<Map<String, String>> dataList = new ArrayList<>();
-    private List<Classes> class_List = new ArrayList<>();
     private SimpleAdapter simpleAdapter;
 
-    private ClassAdapter classAdapter = null;
     private ListView lvClassList;
     private String[] class_titles = null;
     private String[] class_id = null;
     private String[] teachers = null;
-    private TypedArray images = null;
     private String account;
     private SwipeRefreshLayout swipe;
 
@@ -73,11 +70,12 @@ public class StudentListActivity extends AppCompatActivity {
         lvClassList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                //Toast.makeText(StudentListActivity.this, class_id[position] , Toast.LENGTH_SHORT).show();
+                String[] strings = new String[2];
+                strings[0] = account;
+                strings[1] = class_id[position];
+                Toast.makeText(StudentListActivity.this, strings[1] , Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(StudentListActivity.this, SigninActivity.class);
-                intent.putExtra("stu_id",account);
-                intent.putExtra("class_id",class_id[position]);
+                intent.putExtra("data",strings);
                 startActivity(intent);
             }
         });
@@ -103,7 +101,7 @@ public class StudentListActivity extends AppCompatActivity {
 
     private void initData() {
         int length;
-        String[][] str = new String[50][50];
+        String[][] str;
         String[] course_id = new String[50];
         String[] course_name = new String[50];
         String[] teacher = new String[50];
