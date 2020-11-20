@@ -37,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         final ImageView ivPwdSwitch = findViewById(R.id.iv_pwd_switch);
         etPwd = findViewById(R.id.et_pwd);
         etAccount = findViewById(R.id.et_Account);
-        cbRemember_pwd = findViewById(R.id.cbRemember_pwd);
         btLogin = findViewById(R.id.bt_login);
         //spSwitch = findViewById(R.id.spJob);
         tvReg = findViewById(R.id.tv_register);
