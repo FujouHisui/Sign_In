@@ -73,33 +73,39 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Boolean[] isLoggedIn = new Boolean[2];
                 MysqlLogin msl = new MysqlLogin();
-                try {
-                    isLoggedIn = msl.execute(etAccount.getText().toString(),
-                            etPwd.getText().toString()).get();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-
-                if (isLoggedIn[0]) {
-                    Toast.makeText(LoginActivity.this, "Logged in!",
-                            Toast.LENGTH_SHORT).show();
-                    if (isLoggedIn[1]){
-                        Intent intent=new Intent(   LoginActivity.this,
-                                TeacherActivity.class);
-                        intent.putExtra("Account",etAccount.getText().toString());
-                        startActivity(intent);
-                    }else {
-                        Intent intent=new Intent(   LoginActivity.this,
-                                StudentListActivity.class);
-                        intent.putExtra("Account",etAccount.getText().toString());
-                        startActivity(intent);
+                if (etAccount.getText().toString().equals("") ||
+                        etPwd.getText().toString().equals(""))
+                    Toast.makeText(LoginActivity.this,
+                            "不得为空", Toast.LENGTH_SHORT).show();
+                else {
+                    try {
+                        isLoggedIn = msl.execute(etAccount.getText().toString(),
+                                etPwd.getText().toString()).get();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                } else {
-                    Toast.makeText(LoginActivity.this, "Error!",
-                            Toast.LENGTH_SHORT).show();
+
+
+                    if (isLoggedIn[0]) {
+                        Toast.makeText(LoginActivity.this, "Logged in!",
+                                Toast.LENGTH_SHORT).show();
+                        if (isLoggedIn[1]){
+                            Intent intent=new Intent(   LoginActivity.this,
+                                    TeacherActivity.class);
+                            intent.putExtra("Account",etAccount.getText().toString());
+                            startActivity(intent);
+                        }else {
+                            Intent intent=new Intent(   LoginActivity.this,
+                                    StudentListActivity.class);
+                            intent.putExtra("Account",etAccount.getText().toString());
+                            startActivity(intent);
+                        }
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Error!",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

@@ -67,7 +67,8 @@ public class AttendanceListActivity extends AppCompatActivity {
         lvAttendance.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(AttendanceListActivity.this, position_str[position], Toast.LENGTH_SHORT).show();
+                Toast.makeText(AttendanceListActivity.this,
+                        position_str[position], Toast.LENGTH_SHORT).show();
             }
         });
 

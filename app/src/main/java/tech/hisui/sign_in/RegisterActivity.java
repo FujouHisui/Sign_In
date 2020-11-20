@@ -57,25 +57,30 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean result = false;
                 MysqlReg msu = new MysqlReg();
-                try {
-                    result = msu.execute(etAccount.getText().toString(), etPwd.getText().toString(),
-                            String.valueOf(sp_job.getSelectedItemId())).get();
-                }catch (ExecutionException e){
-                    e.printStackTrace();
-                }catch (InterruptedException e){
-                    e.printStackTrace();
-                }
+                if (etAccount.getText().toString().equals("") ||
+                        etPwd.getText().toString().equals(""))
+                    Toast.makeText(RegisterActivity.this,
+                            "不得为空", Toast.LENGTH_SHORT).show();
+                else {
+                    try {
+                        result = msu.execute(etAccount.getText().toString(), etPwd.getText().toString(),
+                                String.valueOf(sp_job.getSelectedItemId())).get();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
-                if (result) {
-                    Toast.makeText(RegisterActivity.this, "Succeed!",
-                            Toast.LENGTH_SHORT).show();
-                    RegisterActivity.this.finish();
-                }else {
-                    Toast.makeText(RegisterActivity.this, "Error!",
-                            Toast.LENGTH_SHORT).show();
+                    if (result) {
+                        Toast.makeText(RegisterActivity.this, "Succeed!",
+                                Toast.LENGTH_SHORT).show();
+                        RegisterActivity.this.finish();
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "Error!",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
-
         });
     }
 }
